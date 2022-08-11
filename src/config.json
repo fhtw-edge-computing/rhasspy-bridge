@@ -1,0 +1,273 @@
+{
+    "globalParams": {
+        "openHabBaseURL": "http://localhost:8080"
+    },
+    "intentMappings": [
+        {
+            "intentName": "ExtractWebsite",
+            "actionType": "EXTRACT_WEBSITE",
+            "matchSlotList": [
+                {
+                    "type": "wetter"
+                },
+                {
+                    "type": "witz"
+                }
+            ],
+            "mappedParamsList": [
+                {
+                    "url": "https://wetter.orf.at/{arg}",
+                    "xpath": "(//p[@class=\"teaser\"])[1]/text()",
+                    "fallback": "Ich konnte das Wetter nicht abrufen"
+                },
+                {
+                    "url": "https://witze.net/zuf%C3%A4llige-witze",
+                    "xpath": "(//div[@class=\"joke\"])[1]/text()",
+                    "fallback": "Ich konnte keinen Witz abrufen"
+                }
+            ]
+        },
+        {
+            "intentName": "GetTemperature",
+            "actionType": "HTTP_REQUEST",
+            "matchSlotList": [
+                {
+                    "room": "wohnzimmer"
+                },
+                {
+                    "room": "labor"
+                }
+            ],
+            "mappedParamsList": [
+                {
+                    "url": "{openHabBaseURL}/rest/items/IST_Wohnung_Temp"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/IST_IoT_Temperature"
+                }
+            ],
+            "globalParams": {
+                "httpMethod": "GET",
+                "resultParam": "state",
+                "textTemplate": "Im {room} hat es {result} grad"
+            }
+        },
+        {
+            "intentName": "ChangeLightStateDimmer",
+            "actionType": "HTTP_REQUEST",
+            "matchSlotList": [
+                {
+                    "room": "schlafzimmer"
+                },
+                {
+                    "room": "wohnzimmer"
+                },
+                {
+                    "room": "kueche"
+                },
+                {
+                    "room": "seminarbereich"
+                },
+                {
+                    "room": "labor"
+                }
+            ],
+            "mappedParamsList": [
+                {
+                    "url": "{openHabBaseURL}/rest/items/SZ_LichtDimmer"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/WZ_LichtDimmer"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Kueche_LichtDimmer"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/SR_LichtDimmer"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/IoT_LichtDimmer"
+                }
+            ],
+            "globalParams": {
+                "httpMethod": "POST",
+                "sendParam": "value",
+                "textTemplate": "Deckenlicht {room} {value} Prozent"
+            }
+        },
+        {
+            "intentName": "ChangeLightState",
+            "actionType": "HTTP_REQUEST",
+            "matchSlotList": [
+                {
+                    "name": "esstisch"
+                },
+                {
+                    "name": "kochtisch"
+                },
+                {
+                    "name": "wohnzimmertisch"
+                },
+                {
+                    "name": "wand"
+                },
+                {
+                    "name": "bad"
+                },
+                {
+                    "name": "gang"
+                },
+                {
+                    "name": "alle"
+                }
+            ],
+            "mappedParamsList": [
+                {
+                    "url": "{openHabBaseURL}/rest/items/Kueche1_KNX_Licht_Schalten"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Kueche2_KNX_Licht_Schalten"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/WZ_KNX_Licht_Schalten"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Schlafzimmer_KNX_Licht_Schalten"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Bad_KNX_Licht_Schalten"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Gang1_KNX_Licht_Schalten"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/gLights_Wohnung"
+                }
+            ],
+            "globalParams": {
+                "httpMethod": "POST",
+                "sendParam": "value",
+                "textTemplate": "Licht {name} {value}",
+                "textReplace": {
+                    "ON": "ein",
+                    "OFF": "aus"
+                }
+            }
+        },
+        {
+            "intentName": "ChangeShutterState",
+            "actionType": "HTTP_REQUEST",
+            "matchSlotList": [
+                {
+                    "room": "wohnzimmer"
+                },
+                {
+                    "room": "kueche"
+                },
+                {
+                    "room": "seminarbereich"
+                },
+                {
+                    "room": "labor"
+                },
+                {
+                    "room": "alle"
+                }
+            ],
+            "mappedParamsList": [
+                {
+                    "url": "{openHabBaseURL}/rest/items/WZ_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Kueche_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/SR_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/IoT_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Wohnung_Jalousien"
+                }
+            ],
+            "globalParams": {
+                "httpMethod": "POST",
+                "sendParam": "state",
+                "textTemplate": "Jalousie {room} {state}",
+                "textReplace": {
+                    "DOWN": "nach unten",
+                    "UP": "nach oben"
+                }
+            }
+        },
+        {
+            "intentName": "ChangeShutterPercentage",
+            "actionType": "HTTP_REQUEST",
+            "matchSlotList": [
+                {
+                    "room": "wohnzimmer"
+                },
+                {
+                    "room": "kueche"
+                },
+                {
+                    "room": "seminarbereich"
+                },
+                {
+                    "room": "labor"
+                },
+                {
+                    "room": "alle"
+                }
+            ],
+            "mappedParamsList": [
+                {
+                    "url": "{openHabBaseURL}/rest/items/WZ_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Kueche_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/SR_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/IoT_Jalousien"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/Wohnung_Jalousien"
+                }
+            ],
+            "globalParams": {
+                "httpMethod": "POST",
+                "sendParam": "value",
+                "textTemplate": "Jalousie {room} {value} prozent"
+            }
+        },
+        {
+            "intentName": "OpenDoor",
+            "actionType": "HTTP_REQUEST",
+            "matchSlotList": [
+                {
+                    "name": "bad"
+                },
+                {
+                    "name": "labor"
+                }
+            ],
+            "mappedParamsList": [
+                {
+                    "url": "{openHabBaseURL}/rest/items/Bad_Tuer"
+                },
+                {
+                    "url": "{openHabBaseURL}/rest/items/IoT_Tuer"
+                }
+            ],
+            "globalParams": {
+                "httpMethod": "POST",
+                "sendParam": "value",
+                "textTemplate": "Tür {name} auf"
+            }
+        }
+    ]
+}
