@@ -6,6 +6,8 @@ We're using this Rhasspy Bridge with the following configuration, but it's proba
 * Current Raspberry Pi OS, 32bit
 * [Jabra Speak 510](https://www.jabra.com.de/supportpages/jabra-speak-510#/#7510-209)
 
+Also see the project [Alex offline speech assistant](https://github.com/fhtw-edge-computing/alex-speech-assistant/) where I've tried to create an FOSS based offline speech assistant before I've discovered Rhasspy.
+
 ## Getting started
 To use `Rhasspy Bridge` a running instance of Rhasspy is needed. We followed [these steps for installing Rhasspy in their docs](https://rhasspy.readthedocs.io/en/latest/installation/#debian). We didn't use `Docker`, but the native install on `Debian`. For our Raspberry Pi 4 with 32bit OS the `armhf` package is the correct one. See [Hints](README.md#hints) if you're running into problems while installing Rhasspy.
 
