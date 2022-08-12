@@ -13,7 +13,7 @@ To use `Rhasspy Bridge` a running instance of Rhasspy is needed. We followed [th
 
 You can start with an own Rhasspy configuration, however if you want to see Rhasspy Bridge in action you can use the (German) backup file in this repo in the folder [/rhasspy/rhasspy-backup-profile.zip](https://github.com/fhtw-edge-computing/rhasspy-bridge/tree/main/rhasspy). It works out of the box along with the [config.json](https://github.com/fhtw-edge-computing/rhasspy-bridge/blob/main/src/config.json) of the bridge.
 
-After running Rhasspy, also start the `server.py` from this repo in a differnt terminal:
+After running Rhasspy with `rhasspy -p de`, also start the `server.py` from this repo in a differnt terminal:
 * `cd src`
 * `python3 server.py`
 
