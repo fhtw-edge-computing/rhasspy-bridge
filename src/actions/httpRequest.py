@@ -24,8 +24,9 @@ def doAction(actionType, config, totalConfig):
 		url = url.format(**globalGlobalParams)
 		steps.append(f'HTTP {httpMethod} "{sendValue}" to "{url}"')
 		print(steps[-1])
-		response = requests.request(httpMethod, params.get("url"), data=str(sendValue), timeout=0.5)
-	except:
+		response = requests.request(httpMethod, url, data=str(sendValue), timeout=0.5)
+	except requests.exceptions.RequestException as e:
+		print(e)
 		error = True
 	json = {}
 	try:
