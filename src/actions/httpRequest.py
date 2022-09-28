@@ -25,6 +25,10 @@ def doAction(actionType, config, totalConfig):
 		steps.append(f'HTTP {httpMethod} "{sendValue}" to "{url}"')
 		print(steps[-1])
 		response = requests.request(httpMethod, url, data=str(sendValue), timeout=1.5)
+	except requests.exceptions.ConnectionError as e:
+		print(e)
+		error = True
+		steps.append(f'Connection to "{url}" failed!')
 	except requests.exceptions.RequestException as e:
 		print(e)
 		error = True
