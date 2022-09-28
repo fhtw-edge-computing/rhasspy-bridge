@@ -19,4 +19,4 @@ sleep 2
 echo "start browser..."
 #sensible-browser http://localhost:12101/ &
 #sleep 5
-sensible-browser http://localhost:1234/ &
+chromium-browser --kiosk http://localhost:1234/ &
