@@ -21,7 +21,7 @@
                     "fallback": "Ich konnte das Wetter nicht abrufen"
                 },
                 {
-                    "url": "https://witze.net/zuf%C3%A4llige-witze",
+                    "url": "https://witze.net/",
                     "xpath": "(//div[@class=\"joke\"])[1]/text()",
                     "fallback": "Ich konnte keinen Witz abrufen"
                 }
