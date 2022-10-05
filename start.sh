@@ -15,8 +15,8 @@ rhasspy -p de > /home/pi/log_rhasspy.txt &
 echo "start bridge..."
 cd /home/pi/rhasspy-bridge/src/ && python3 server.py > /home/pi/log_bridge.txt &
 
-sleep 2
+sleep 10
 echo "start browser..."
 #sensible-browser http://localhost:12101/ &
 #sleep 5
-chromium-browser --kiosk http://localhost:1234/ &
+chromium-browser --start-fullscreen http://localhost:1234/ &
